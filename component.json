@@ -1,0 +1,6 @@
+{
+    "repos": "https://github.com/rackt/react-router.git",
+    "version": "v1.0.0",
+    "name": "react-router",
+    "main": "ReactRouter.js"
+}

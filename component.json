@@ -1,0 +1,12 @@
+{
+    "repos": "https://github.com/rackt/react-router.git",
+    "version": "v1.0.0",
+    "name": "react-router",
+    "main": "lib/index.js",
+    "dependencies": {
+        "react": "^0.14.0",
+        "invariant": "^2.0.0",
+        "warning": "^2.0.0",
+        "history": "^1.13.1"
+    }
+}

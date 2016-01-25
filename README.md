@@ -34,7 +34,7 @@ We support all browsers and environments where React runs.
 
 Using [npm](https://www.npmjs.com/):
 
-    $ npm install react-router
+    $ npm install --save react-router
 
 Then with a module bundler like [webpack](https://webpack.github.io/) that supports either CommonJS or ES2015 modules, use as you would anything else:
 
@@ -58,7 +58,7 @@ You can find the library on `window.ReactRouter`.
 
 ### Versioning and Stability
 
-React Router follows semver to the best of our interpretation of it. We want React Router to be a stable dependency that’s easy to keep current. Here is our upgrading stategy for your apps.
+React Router follows semver to the best of our interpretation of it. We want React Router to be a stable dependency that’s easy to keep current. Here is our upgrading strategy for your apps.
 
 Assuming we are currently on version 1.0:
 

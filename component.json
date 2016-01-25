@@ -5,6 +5,10 @@
     "main": "lib/index",
     "tag": "master",
     "reposType": "npm",
-    "dependencies": {},
-    "version": "1.0.3"
+    "dependencies": {
+        "history": "^2.0.0-rc1",
+        "invariant": "^2.0.0",
+        "warning": "^2.0.0"
+    },
+    "version": "2.0.0-rc5"
 }

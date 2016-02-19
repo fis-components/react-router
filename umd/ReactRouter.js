@@ -61,7 +61,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _Router2 = __webpack_require__(37);
+	var _Router2 = __webpack_require__(36);
 
 	var _Router3 = _interopRequireDefault(_Router2);
 
@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.Link = _Link3['default'];
 
-	var _IndexLink2 = __webpack_require__(31);
+	var _IndexLink2 = __webpack_require__(30);
 
 	var _IndexLink3 = _interopRequireDefault(_IndexLink2);
 
@@ -81,13 +81,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/* components (configuration) */
 
-	var _IndexRedirect2 = __webpack_require__(32);
+	var _IndexRedirect2 = __webpack_require__(31);
 
 	var _IndexRedirect3 = _interopRequireDefault(_IndexRedirect2);
 
 	exports.IndexRedirect = _IndexRedirect3['default'];
 
-	var _IndexRoute2 = __webpack_require__(33);
+	var _IndexRoute2 = __webpack_require__(32);
 
 	var _IndexRoute3 = _interopRequireDefault(_IndexRoute2);
 
@@ -99,7 +99,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.Redirect = _Redirect3['default'];
 
-	var _Route2 = __webpack_require__(35);
+	var _Route2 = __webpack_require__(34);
 
 	var _Route3 = _interopRequireDefault(_Route2);
 
@@ -107,19 +107,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/* mixins */
 
-	var _History2 = __webpack_require__(30);
+	var _History2 = __webpack_require__(29);
 
 	var _History3 = _interopRequireDefault(_History2);
 
 	exports.History = _History3['default'];
 
-	var _Lifecycle2 = __webpack_require__(34);
+	var _Lifecycle2 = __webpack_require__(33);
 
 	var _Lifecycle3 = _interopRequireDefault(_Lifecycle2);
 
 	exports.Lifecycle = _Lifecycle3['default'];
 
-	var _RouteContext2 = __webpack_require__(36);
+	var _RouteContext2 = __webpack_require__(35);
 
 	var _RouteContext3 = _interopRequireDefault(_RouteContext2);
 
@@ -127,7 +127,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/* utils */
 
-	var _useRoutes2 = __webpack_require__(48);
+	var _useRoutes2 = __webpack_require__(47);
 
 	var _useRoutes3 = _interopRequireDefault(_useRoutes2);
 
@@ -143,7 +143,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.RouterContext = _RouterContext3['default'];
 
-	var _RoutingContext2 = __webpack_require__(38);
+	var _RoutingContext2 = __webpack_require__(37);
 
 	var _RoutingContext3 = _interopRequireDefault(_RoutingContext2);
 
@@ -155,7 +155,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.PropTypes = _PropTypes3['default'];
 
-	var _match2 = __webpack_require__(46);
+	var _match2 = __webpack_require__(45);
 
 	var _match3 = _interopRequireDefault(_match2);
 
@@ -173,13 +173,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/* histories */
 
-	var _browserHistory2 = __webpack_require__(40);
+	var _browserHistory2 = __webpack_require__(39);
 
 	var _browserHistory3 = _interopRequireDefault(_browserHistory2);
 
 	exports.browserHistory = _browserHistory3['default'];
 
-	var _hashHistory2 = __webpack_require__(44);
+	var _hashHistory2 = __webpack_require__(43);
 
 	var _hashHistory3 = _interopRequireDefault(_hashHistory2);
 
@@ -190,10 +190,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _createMemoryHistory3 = _interopRequireDefault(_createMemoryHistory2);
 
 	exports.createMemoryHistory = _createMemoryHistory3['default'];
-
-	var _Router4 = _interopRequireDefault(_Router2);
-
-	exports['default'] = _Router4['default'];
 
 /***/ },
 /* 1 */
@@ -372,9 +368,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	function isValidChild(object) {
 	  return object == null || _react2['default'].isValidElement(object);
@@ -392,7 +388,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var error = propTypes[propName](props, propName, componentName);
 
 	      /* istanbul ignore if: error logging */
-	      if (error instanceof Error)  false ? _warning2['default'](false, error.message) : undefined;
+	      if (error instanceof Error)  false ? _routerWarning2['default'](false, error.message) : undefined;
 	    }
 	  }
 	}
@@ -535,6 +531,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	exports.__esModule = true;
+	exports.extractPath = extractPath;
+	exports.parsePath = parsePath;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -542,12 +540,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _extractPath = __webpack_require__(29);
+	function extractPath(string) {
+	  var match = string.match(/^https?:\/\/[^\/]*/);
 
-	var _extractPath2 = _interopRequireDefault(_extractPath);
+	  if (match == null) return string;
+
+	  return string.substring(match[0].length);
+	}
 
 	function parsePath(path) {
-	  var pathname = _extractPath2['default'](path);
+	  var pathname = extractPath(path);
 	  var search = '';
 	  var hash = '';
 
@@ -573,9 +575,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    hash: hash
 	  };
 	}
-
-	exports['default'] = parsePath;
-	module.exports = exports['default'];
 
 /***/ },
 /* 8 */
@@ -873,15 +872,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _queryString = __webpack_require__(57);
+	var _queryString = __webpack_require__(56);
 
 	var _runTransitionHook = __webpack_require__(17);
 
 	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
 
-	var _parsePath = __webpack_require__(7);
-
-	var _parsePath2 = _interopRequireDefault(_parsePath);
+	var _PathUtils = __webpack_require__(7);
 
 	var _deprecate = __webpack_require__(16);
 
@@ -936,14 +933,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function appendQuery(location, query) {
 	      var _extends2;
 
-	      var queryString = undefined;
-	      if (!query || (queryString = stringifyQuery(query)) === '') return location;
+	      var searchBaseSpec = location[SEARCH_BASE_KEY];
+	      var queryString = query ? stringifyQuery(query) : '';
+	      if (!searchBaseSpec && !queryString) {
+	        return location;
+	      }
 
 	       false ? _warning2['default'](stringifyQuery !== defaultStringifyQuery || !isNestedObject(query), 'useQueries does not stringify nested query objects by default; ' + 'use a custom stringifyQuery function') : undefined;
 
-	      if (typeof location === 'string') location = _parsePath2['default'](location);
+	      if (typeof location === 'string') location = _PathUtils.parsePath(location);
 
-	      var searchBaseSpec = location[SEARCH_BASE_KEY];
 	      var searchBase = undefined;
 	      if (searchBaseSpec && location.search === searchBaseSpec.search) {
 	        searchBase = searchBaseSpec.searchBase;
@@ -951,7 +950,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        searchBase = location.search || '';
 	      }
 
-	      var search = searchBase + (searchBase ? '&' : '?') + queryString;
+	      var search = searchBase;
+	      if (queryString) {
+	        search += (search ? '&' : '?') + queryString;
+	      }
 
 	      return _extends({}, location, (_extends2 = {
 	        search: search
@@ -992,20 +994,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return history.createHref(appendQuery(location, query || location.query));
 	    }
 
-	    function createLocation() {
-	      return addQuery(history.createLocation.apply(history, arguments));
+	    function createLocation(location) {
+	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	        args[_key - 1] = arguments[_key];
+	      }
+
+	      var fullLocation = history.createLocation.apply(history, [appendQuery(location, location.query)].concat(args));
+	      if (location.query) {
+	        fullLocation.query = location.query;
+	      }
+	      return addQuery(fullLocation);
 	    }
 
 	    // deprecated
 	    function pushState(state, path, query) {
-	      if (typeof path === 'string') path = _parsePath2['default'](path);
+	      if (typeof path === 'string') path = _PathUtils.parsePath(path);
 
 	      push(_extends({ state: state }, path, { query: query }));
 	    }
 
 	    // deprecated
 	    function replaceState(state, path, query) {
-	      if (typeof path === 'string') path = _parsePath2['default'](path);
+	      if (typeof path === 'string') path = _PathUtils.parsePath(path);
 
 	      replace(_extends({ state: state }, path, { query: query }));
 	    }
@@ -1035,25 +1045,57 @@ return /******/ (function(modules) { // webpackBootstrap
 	"use strict";
 
 	exports.__esModule = true;
+	var _slice = Array.prototype.slice;
 	exports.loopAsync = loopAsync;
 	exports.mapAsync = mapAsync;
 
 	function loopAsync(turns, work, callback) {
 	  var currentTurn = 0,
 	      isDone = false;
+	  var sync = false,
+	      hasNext = false,
+	      doneArgs = undefined;
 
 	  function done() {
 	    isDone = true;
+	    if (sync) {
+	      // Iterate instead of recursing if possible.
+	      doneArgs = [].concat(_slice.call(arguments));
+	      return;
+	    }
+
 	    callback.apply(this, arguments);
 	  }
 
 	  function next() {
-	    if (isDone) return;
+	    if (isDone) {
+	      return;
+	    }
 
-	    if (currentTurn < turns) {
+	    hasNext = true;
+	    if (sync) {
+	      // Iterate instead of recursing if possible.
+	      return;
+	    }
+
+	    sync = true;
+
+	    while (!isDone && currentTurn < turns && hasNext) {
+	      hasNext = false;
 	      work.call(this, currentTurn++, next, done);
-	    } else {
-	      done.apply(this, arguments);
+	    }
+
+	    sync = false;
+
+	    if (isDone) {
+	      // This means the loop finished synchronously.
+	      callback.apply(this, doneArgs);
+	      return;
+	    }
+
+	    if (currentTurn >= turns && hasNext) {
+	      isDone = true;
+	      callback();
 	    }
 	  }
 
@@ -1115,15 +1157,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _deprecateObjectProperties2 = _interopRequireDefault(_deprecateObjectProperties);
 
-	var _getRouteParams = __webpack_require__(43);
+	var _getRouteParams = __webpack_require__(42);
 
 	var _getRouteParams2 = _interopRequireDefault(_getRouteParams);
 
 	var _RouteUtils = __webpack_require__(5);
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	var _React$PropTypes = _react2['default'].PropTypes;
 	var array = _React$PropTypes.array;
@@ -1166,7 +1208,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var location = _props.location;
 
 	    if (!router) {
-	       false ? _warning2['default'](false, '`<RouterContext>` expects a `router` rather than a `history`') : undefined;
+	       false ? _routerWarning2['default'](false, '`<RouterContext>` expects a `router` rather than a `history`') : undefined;
 
 	      router = _extends({}, history, {
 	        setRouteLeaveHook: history.listenBeforeLeavingRoute
@@ -1264,27 +1306,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	var _historyLibActions = __webpack_require__(9);
 
-	var _computeChangedRoutes2 = __webpack_require__(41);
+	var _computeChangedRoutes2 = __webpack_require__(40);
 
 	var _computeChangedRoutes3 = _interopRequireDefault(_computeChangedRoutes2);
 
-	var _TransitionUtils = __webpack_require__(39);
+	var _TransitionUtils = __webpack_require__(38);
 
-	var _isActive2 = __webpack_require__(45);
+	var _isActive2 = __webpack_require__(44);
 
 	var _isActive3 = _interopRequireDefault(_isActive2);
 
-	var _getComponents = __webpack_require__(42);
+	var _getComponents = __webpack_require__(41);
 
 	var _getComponents2 = _interopRequireDefault(_getComponents);
 
-	var _matchRoutes = __webpack_require__(47);
+	var _matchRoutes = __webpack_require__(46);
 
 	var _matchRoutes2 = _interopRequireDefault(_matchRoutes);
 
@@ -1305,13 +1347,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var indexOnly = undefined;
 	    if (indexOnlyOrDeprecatedQuery && indexOnlyOrDeprecatedQuery !== true || deprecatedIndexOnly !== null) {
-	       false ? _warning2['default'](false, '`isActive(pathname, query, indexOnly) is deprecated; use `isActive(location, indexOnly)` with a location descriptor instead. http://tiny.cc/router-isActivedeprecated') : undefined;
+	       false ? _routerWarning2['default'](false, '`isActive(pathname, query, indexOnly) is deprecated; use `isActive(location, indexOnly)` with a location descriptor instead. http://tiny.cc/router-isActivedeprecated') : undefined;
 	      location = { pathname: location, query: indexOnlyOrDeprecatedQuery };
 	      indexOnly = deprecatedIndexOnly || false;
 	    } else {
-	      if (typeof location === 'string') {
-	        location = { pathname: location };
-	      }
+	      location = history.createLocation(location);
 	      indexOnly = indexOnlyOrDeprecatedQuery;
 	    }
 
@@ -1491,9 +1531,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (history.listenBeforeUnload) unlistenBeforeUnload = history.listenBeforeUnload(beforeUnloadHook);
 	      }
 	    } else {
-	       false ? _warning2['default'](false, 'adding multiple leave hooks for the same route is deprecated; manage multiple confirmations in your own code instead') : undefined;
-
 	      if (hooks.indexOf(hook) === -1) {
+	         false ? _routerWarning2['default'](false, 'adding multiple leave hooks for the same route is deprecated; manage multiple confirmations in your own code instead') : undefined;
+
 	        hooks.push(hook);
 	      }
 	    }
@@ -1535,7 +1575,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          } else if (nextState) {
 	            listener(null, nextState);
 	          } else {
-	             false ? _warning2['default'](false, 'Location "%s" did not match any routes', location.pathname + location.search + location.hash) : undefined;
+	             false ? _routerWarning2['default'](false, 'Location "%s" did not match any routes', location.pathname + location.search + location.hash) : undefined;
 	          }
 	        });
 	      }
@@ -1621,11 +1661,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) {
 	    return false;
 	  }
-	  // FIXME: Work around our browser history not working correctly on Chrome
-	  // iOS: https://github.com/rackt/react-router/issues/2565
-	  if (ua.indexOf('CriOS') !== -1) {
-	    return false;
-	  }
 	  return window.history && 'pushState' in window.history;
 	}
 
@@ -1709,9 +1744,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	var _React$PropTypes = _react2['default'].PropTypes;
 	var bool = _React$PropTypes.bool;
@@ -1734,17 +1769,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }return true;
 	}
 
-	function createLocationDescriptor(_ref) {
-	  var to = _ref.to;
+	function createLocationDescriptor(to, _ref) {
 	  var query = _ref.query;
 	  var hash = _ref.hash;
 	  var state = _ref.state;
 
-	  if (typeof to !== 'object') {
+	  if (query || hash || state) {
 	    return { pathname: to, query: query, hash: hash, state: state };
-	  } else {
-	    return _extends({ query: query, hash: hash, state: state }, to);
 	  }
+
+	  return to;
 	}
 
 	/**
@@ -1812,12 +1846,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (allowTransition) {
 	      var _props = this.props;
-	      var state = _props.state;
 	      var to = _props.to;
 	      var query = _props.query;
 	      var hash = _props.hash;
+	      var state = _props.state;
 
-	      var _location = createLocationDescriptor({ to: to, query: query, hash: hash, state: state });
+	      var _location = createLocationDescriptor(to, { query: query, hash: hash, state: state });
 
 	      this.context.router.push(_location);
 	    }
@@ -1835,18 +1869,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var props = _objectWithoutProperties(_props2, ['to', 'query', 'hash', 'state', 'activeClassName', 'activeStyle', 'onlyActiveOnIndex']);
 
-	     false ? _warning2['default'](!(query || hash || state), 'the `query`, `hash`, and `state` props on `<Link>` are deprecated, use `<Link to={{ pathname, query, hash, state }}/>. http://tiny.cc/router-isActivedeprecated') : undefined;
+	     false ? _routerWarning2['default'](!(query || hash || state), 'the `query`, `hash`, and `state` props on `<Link>` are deprecated, use `<Link to={{ pathname, query, hash, state }}/>. http://tiny.cc/router-isActivedeprecated') : undefined;
 
 	    // Ignore if rendered outside the context of router, simplifies unit testing.
 	    var router = this.context.router;
 
 	    if (router) {
-	      var loc = createLocationDescriptor({ to: to, query: query, hash: hash, state: state });
-
-	      props.href = router.createHref(loc);
+	      var _location2 = createLocationDescriptor(to, { query: query, hash: hash, state: state });
+	      props.href = router.createHref(_location2);
 
 	      if (activeClassName || activeStyle != null && !isEmptyObject(activeStyle)) {
-	        if (router.isActive(loc, onlyActiveOnIndex)) {
+	        if (router.isActive(_location2, onlyActiveOnIndex)) {
 	          if (activeClassName) props.className += props.className === '' ? activeClassName : ' ' + activeClassName;
 
 	          if (activeStyle) props.style = _extends({}, props.style, activeStyle);
@@ -2023,7 +2056,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
 
-	var _historyLibCreateMemoryHistory = __webpack_require__(55);
+	var _historyLibCreateMemoryHistory = __webpack_require__(54);
 
 	var _historyLibCreateMemoryHistory2 = _interopRequireDefault(_historyLibCreateMemoryHistory);
 
@@ -2078,9 +2111,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	var useMembrane = false;
 
@@ -2104,7 +2137,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var _loop = function (prop) {
 	    if (typeof object[prop] === 'function') {
 	      membrane[prop] = function () {
-	         false ? _warning2['default'](false, message) : undefined;
+	         false ? _routerWarning2['default'](false, message) : undefined;
 	        return object[prop].apply(object, arguments);
 	      };
 	    } else {
@@ -2112,7 +2145,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        configurable: false,
 	        enumerable: false,
 	        get: function get() {
-	           false ? _warning2['default'](false, message) : undefined;
+	           false ? _routerWarning2['default'](false, message) : undefined;
 	          return object[prop];
 	        }
 	      });
@@ -2143,7 +2176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
 
-	var _historyLibUseBasename = __webpack_require__(56);
+	var _historyLibUseBasename = __webpack_require__(55);
 
 	var _historyLibUseBasename2 = _interopRequireDefault(_historyLibUseBasename);
 
@@ -2175,7 +2208,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _warning2 = _interopRequireDefault(_warning);
 
 	var KeyPrefix = '@@History/';
-	var QuotaExceededError = 'QuotaExceededError';
+	var QuotaExceededErrors = ['QuotaExceededError', 'QUOTA_EXCEEDED_ERR'];
+
 	var SecurityError = 'SecurityError';
 
 	function createKey(key) {
@@ -2198,7 +2232,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return;
 	    }
 
-	    if (error.name === QuotaExceededError && window.sessionStorage.length === 0) {
+	    if (QuotaExceededErrors.indexOf(error.name) >= 0 && window.sessionStorage.length === 0) {
 	      // Safari "private mode" throws QuotaExceededError.
 	       false ? _warning2['default'](false, '[history] Unable to save state; sessionStorage is not available in Safari private mode') : undefined;
 
@@ -2301,6 +2335,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _Actions = __webpack_require__(9);
 
+	var _PathUtils = __webpack_require__(7);
+
 	var _ExecutionEnvironment = __webpack_require__(10);
 
 	var _DOMUtils = __webpack_require__(15);
@@ -2310,10 +2346,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _createDOMHistory = __webpack_require__(26);
 
 	var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
-
-	var _parsePath = __webpack_require__(7);
-
-	var _parsePath2 = _interopRequireDefault(_parsePath);
 
 	function isAbsolutePath(path) {
 	  return typeof path === 'string' && path.charAt(0) === '/';
@@ -2373,7 +2405,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      key = state = null;
 	    }
 
-	    var location = _parsePath2['default'](path);
+	    var location = _PathUtils.parsePath(path);
 
 	    return history.createLocation(_extends({}, location, { state: state }), undefined, key);
 	  }
@@ -2548,25 +2580,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _deepEqual = __webpack_require__(49);
+	var _deepEqual = __webpack_require__(48);
 
 	var _deepEqual2 = _interopRequireDefault(_deepEqual);
 
-	var _AsyncUtils = __webpack_require__(52);
+	var _PathUtils = __webpack_require__(7);
+
+	var _AsyncUtils = __webpack_require__(51);
 
 	var _Actions = __webpack_require__(9);
 
-	var _createLocation2 = __webpack_require__(54);
+	var _createLocation2 = __webpack_require__(53);
 
 	var _createLocation3 = _interopRequireDefault(_createLocation2);
 
 	var _runTransitionHook = __webpack_require__(17);
 
 	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
-
-	var _parsePath = __webpack_require__(7);
-
-	var _parsePath2 = _interopRequireDefault(_parsePath);
 
 	var _deprecate = __webpack_require__(16);
 
@@ -2691,7 +2721,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var prevPath = createPath(location);
 	          var nextPath = createPath(nextLocation);
 
-	          if (nextPath === prevPath) nextLocation.action = _Actions.REPLACE;
+	          if (nextPath === prevPath && _deepEqual2['default'](location.state, nextLocation.state)) nextLocation.action = _Actions.REPLACE;
 	        }
 
 	        if (finishTransition(nextLocation) !== false) updateLocation(nextLocation);
@@ -2750,7 +2780,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (typeof action === 'object') {
 	       false ? _warning2['default'](false, 'The state (2nd) argument to history.createLocation is deprecated; use a ' + 'location descriptor instead') : undefined;
 
-	      if (typeof location === 'string') location = _parsePath2['default'](location);
+	      if (typeof location === 'string') location = _PathUtils.parsePath(location);
 
 	      location = _extends({}, location, { state: action });
 
@@ -2790,14 +2820,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // deprecated
 	  function pushState(state, path) {
-	    if (typeof path === 'string') path = _parsePath2['default'](path);
+	    if (typeof path === 'string') path = _PathUtils.parsePath(path);
 
 	    push(_extends({ state: state }, path));
 	  }
 
 	  // deprecated
 	  function replaceState(state, path) {
-	    if (typeof path === 'string') path = _parsePath2['default'](path);
+	    if (typeof path === 'string') path = _PathUtils.parsePath(path);
 
 	    replace(_extends({ state: state }, path));
 	  }
@@ -2829,24 +2859,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 29 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	exports.__esModule = true;
-	function extractPath(string) {
-	  var match = string.match(/^https?:\/\/[^\/]*/);
-
-	  if (match == null) return string;
-
-	  return string.substring(match[0].length);
-	}
-
-	exports["default"] = extractPath;
-	module.exports = exports["default"];
-
-/***/ },
-/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2855,9 +2867,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	var _PropTypes = __webpack_require__(6);
 
@@ -2871,7 +2883,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  componentWillMount: function componentWillMount() {
-	     false ? _warning2['default'](false, 'the `History` mixin is deprecated, please access `context.router` with your own `contextTypes`. http://tiny.cc/router-historymixin') : undefined;
+	     false ? _routerWarning2['default'](false, 'the `History` mixin is deprecated, please access `context.router` with your own `contextTypes`. http://tiny.cc/router-historymixin') : undefined;
 	    this.history = this.context.history;
 	  }
 
@@ -2881,7 +2893,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2916,7 +2928,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2929,9 +2941,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	var _invariant = __webpack_require__(3);
 
@@ -2960,7 +2972,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (parentRoute) {
 	        parentRoute.indexRoute = _Redirect2['default'].createRouteFromReactElement(element);
 	      } else {
-	         false ? _warning2['default'](false, 'An <IndexRedirect> does not make sense at the root of your route config') : undefined;
+	         false ? _routerWarning2['default'](false, 'An <IndexRedirect> does not make sense at the root of your route config') : undefined;
 	      }
 	    }
 
@@ -2985,7 +2997,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 33 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2998,9 +3010,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	var _invariant = __webpack_require__(3);
 
@@ -3026,7 +3038,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (parentRoute) {
 	        parentRoute.indexRoute = _RouteUtils.createRouteFromReactElement(element);
 	      } else {
-	         false ? _warning2['default'](false, 'An <IndexRoute> does not make sense at the root of your route config') : undefined;
+	         false ? _routerWarning2['default'](false, 'An <IndexRoute> does not make sense at the root of your route config') : undefined;
 	      }
 	    }
 
@@ -3051,7 +3063,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3060,9 +3072,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	var _react = __webpack_require__(2);
 
@@ -3105,7 +3117,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  componentDidMount: function componentDidMount() {
-	     false ? _warning2['default'](false, 'the `Lifecycle` mixin is deprecated, please use `context.router.setRouteLeaveHook(route, hook)`. http://tiny.cc/router-lifecyclemixin') : undefined;
+	     false ? _routerWarning2['default'](false, 'the `Lifecycle` mixin is deprecated, please use `context.router.setRouteLeaveHook(route, hook)`. http://tiny.cc/router-lifecyclemixin') : undefined;
 	    !this.routerWillLeave ?  false ? _invariant2['default'](false, 'The Lifecycle mixin requires you to define a routerWillLeave method') : _invariant2['default'](false) : undefined;
 
 	    var route = this.props.route || this.context.route;
@@ -3125,7 +3137,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3186,7 +3198,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 36 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3195,9 +3207,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	var _react = __webpack_require__(2);
 
@@ -3228,7 +3240,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  componentWillMount: function componentWillMount() {
-	     false ? _warning2['default'](false, 'The `RouteContext` mixin is deprecated. You can provide `this.props.route` on context with your own `contextTypes`. http://tiny.cc/router-routecontextmixin') : undefined;
+	     false ? _routerWarning2['default'](false, 'The `RouteContext` mixin is deprecated. You can provide `this.props.route` on context with your own `contextTypes`. http://tiny.cc/router-routecontextmixin') : undefined;
 	  }
 
 	};
@@ -3237,7 +3249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 37 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3276,9 +3288,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _RouterUtils = __webpack_require__(20);
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	function isDeprecatedHistory(history) {
 	  return !history || !history.__v2_compatible__;
@@ -3303,7 +3315,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    render: func,
 	    createElement: func,
 	    onError: func,
-	    onUpdate: func
+	    onUpdate: func,
+
+	    // PRIVATE: For client-side rehydration of server match.
+	    matchContext: object
 	  },
 
 	  getDefaultProps: function getDefaultProps() {
@@ -3315,15 +3330,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  getInitialState: function getInitialState() {
-	    // Use initial state from renderProps when available, to allow using match
-	    // on client side when doing server-side rendering.
-	    var _props = this.props;
-	    var location = _props.location;
-	    var routes = _props.routes;
-	    var params = _props.params;
-	    var components = _props.components;
-
-	    return { location: location, routes: routes, params: params, components: components };
+	    return {
+	      location: null,
+	      routes: null,
+	      params: null,
+	      components: null
+	    };
 	  },
 
 	  handleError: function handleError(error) {
@@ -3338,21 +3350,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  componentWillMount: function componentWillMount() {
 	    var _this = this;
 
-	    var history = this.props.history;
-	    var _props2 = this.props;
-	    var routes = _props2.routes;
-	    var children = _props2.children;
-	    var _props3 = this.props;
-	    var parseQueryString = _props3.parseQueryString;
-	    var stringifyQuery = _props3.stringifyQuery;
+	    var _props = this.props;
+	    var parseQueryString = _props.parseQueryString;
+	    var stringifyQuery = _props.stringifyQuery;
 
-	     false ? _warning2['default'](!(parseQueryString || stringifyQuery), '`parseQueryString` and `stringifyQuery` are deprecated. Please create a custom history. http://tiny.cc/router-customquerystring') : undefined;
+	     false ? _routerWarning2['default'](!(parseQueryString || stringifyQuery), '`parseQueryString` and `stringifyQuery` are deprecated. Please create a custom history. http://tiny.cc/router-customquerystring') : undefined;
 
-	    if (isDeprecatedHistory(history)) {
-	      history = this.wrapDeprecatedHistory(history);
-	    }
+	    var _createRouterObjects = this.createRouterObjects();
 
-	    var transitionManager = _createTransitionManager2['default'](history, _RouteUtils.createRoutes(routes || children));
+	    var history = _createRouterObjects.history;
+	    var transitionManager = _createRouterObjects.transitionManager;
+	    var router = _createRouterObjects.router;
+
 	    this._unlisten = transitionManager.listen(function (error, state) {
 	      if (error) {
 	        _this.handleError(error);
@@ -3361,23 +3370,46 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    });
 
-	    this.router = _RouterUtils.createRouterObject(history, transitionManager);
-	    this.history = _RouterUtils.createRoutingHistory(history, transitionManager);
+	    this.history = history;
+	    this.router = router;
+	  },
+
+	  createRouterObjects: function createRouterObjects() {
+	    var matchContext = this.props.matchContext;
+
+	    if (matchContext) {
+	      return matchContext;
+	    }
+
+	    var history = this.props.history;
+	    var _props2 = this.props;
+	    var routes = _props2.routes;
+	    var children = _props2.children;
+
+	    if (isDeprecatedHistory(history)) {
+	      history = this.wrapDeprecatedHistory(history);
+	    }
+
+	    var transitionManager = _createTransitionManager2['default'](history, _RouteUtils.createRoutes(routes || children));
+	    var router = _RouterUtils.createRouterObject(history, transitionManager);
+	    var routingHistory = _RouterUtils.createRoutingHistory(history, transitionManager);
+
+	    return { history: routingHistory, transitionManager: transitionManager, router: router };
 	  },
 
 	  wrapDeprecatedHistory: function wrapDeprecatedHistory(history) {
-	    var _props4 = this.props;
-	    var parseQueryString = _props4.parseQueryString;
-	    var stringifyQuery = _props4.stringifyQuery;
+	    var _props3 = this.props;
+	    var parseQueryString = _props3.parseQueryString;
+	    var stringifyQuery = _props3.stringifyQuery;
 
 	    var createHistory = undefined;
 	    if (history) {
-	       false ? _warning2['default'](false, 'It appears you have provided a deprecated history object to `<Router/>`, please use a history provided by ' + 'React Router with `import { browserHistory } from \'react-router\'` or `import { hashHistory } from \'react-router\'`. ' + 'If you are using a custom history please create it with `useRouterHistory`, see http://tiny.cc/router-usinghistory for details.') : undefined;
+	       false ? _routerWarning2['default'](false, 'It appears you have provided a deprecated history object to `<Router/>`, please use a history provided by ' + 'React Router with `import { browserHistory } from \'react-router\'` or `import { hashHistory } from \'react-router\'`. ' + 'If you are using a custom history please create it with `useRouterHistory`, see http://tiny.cc/router-usinghistory for details.') : undefined;
 	      createHistory = function () {
 	        return history;
 	      };
 	    } else {
-	       false ? _warning2['default'](false, '`Router` no longer defaults the history prop to hash history. Please use the `hashHistory` singleton instead. http://tiny.cc/router-defaulthistory') : undefined;
+	       false ? _routerWarning2['default'](false, '`Router` no longer defaults the history prop to hash history. Please use the `hashHistory` singleton instead. http://tiny.cc/router-defaulthistory') : undefined;
 	      createHistory = _historyLibCreateHashHistory2['default'];
 	    }
 
@@ -3386,9 +3418,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  /* istanbul ignore next: sanity check */
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	     false ? _warning2['default'](nextProps.history === this.props.history, 'You cannot change <Router history>; it will be ignored') : undefined;
+	     false ? _routerWarning2['default'](nextProps.history === this.props.history, 'You cannot change <Router history>; it will be ignored') : undefined;
 
-	     false ? _warning2['default']((nextProps.routes || nextProps.children) === (this.props.routes || this.props.children), 'You cannot change <Router routes>; it will be ignored') : undefined;
+	     false ? _routerWarning2['default']((nextProps.routes || nextProps.children) === (this.props.routes || this.props.children), 'You cannot change <Router routes>; it will be ignored') : undefined;
 	  },
 
 	  componentWillUnmount: function componentWillUnmount() {
@@ -3401,11 +3433,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var routes = _state.routes;
 	    var params = _state.params;
 	    var components = _state.components;
-	    var _props5 = this.props;
-	    var createElement = _props5.createElement;
-	    var render = _props5.render;
+	    var _props4 = this.props;
+	    var createElement = _props4.createElement;
+	    var render = _props4.render;
 
-	    var props = _objectWithoutProperties(_props5, ['createElement', 'render']);
+	    var props = _objectWithoutProperties(_props4, ['createElement', 'render']);
 
 	    if (location == null) return null; // Async match
 
@@ -3432,7 +3464,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 38 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3449,15 +3481,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _RouterContext2 = _interopRequireDefault(_RouterContext);
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	var RoutingContext = _react2['default'].createClass({
 	  displayName: 'RoutingContext',
 
 	  componentWillMount: function componentWillMount() {
-	     false ? _warning2['default'](false, '`RoutingContext` has been renamed to `RouterContext`. Please use `import { RouterContext } from \'react-router\'`. http://tiny.cc/router-routercontext') : undefined;
+	     false ? _routerWarning2['default'](false, '`RoutingContext` has been renamed to `RouterContext`. Please use `import { RouterContext } from \'react-router\'`. http://tiny.cc/router-routercontext') : undefined;
 	  },
 
 	  render: function render() {
@@ -3469,7 +3501,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 39 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3482,9 +3514,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _AsyncUtils = __webpack_require__(12);
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	function createEnterHook(hook, route) {
 	  return function (a, b, callback) {
@@ -3528,7 +3560,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var redirectInfo = undefined;
 	  function replace(location, deprecatedPathname, deprecatedQuery) {
 	    if (deprecatedPathname) {
-	       false ? _warning2['default'](false, '`replaceState(state, pathname, query) is deprecated; use `replace(location)` with a location descriptor instead. http://tiny.cc/router-isActivedeprecated') : undefined;
+	       false ? _routerWarning2['default'](false, '`replaceState(state, pathname, query) is deprecated; use `replace(location)` with a location descriptor instead. http://tiny.cc/router-isActivedeprecated') : undefined;
 	      redirectInfo = {
 	        pathname: deprecatedPathname,
 	        query: deprecatedQuery,
@@ -3563,7 +3595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 40 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3572,7 +3604,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _historyLibCreateBrowserHistory = __webpack_require__(53);
+	var _historyLibCreateBrowserHistory = __webpack_require__(52);
 
 	var _historyLibCreateBrowserHistory2 = _interopRequireDefault(_historyLibCreateBrowserHistory);
 
@@ -3584,7 +3616,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 41 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3645,7 +3677,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 42 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3683,7 +3715,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3712,7 +3744,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3733,7 +3765,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 45 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3865,7 +3897,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 46 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3900,8 +3932,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * This function matches a location to a set of routes and calls
 	 * callback(error, redirectLocation, renderProps) when finished.
 	 *
-	 * Note: You probably don't want to use this in a browser. Use
-	 * the history.listen API instead.
+	 * Note: You probably don't want to use this in a browser unless you're using
+	 * server-side rendering with async routes.
 	 */
 	function match(_ref, callback) {
 	  var history = _ref.history;
@@ -3910,19 +3942,40 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  var options = _objectWithoutProperties(_ref, ['history', 'routes', 'location']);
 
-	  !location ?  false ? _invariant2['default'](false, 'match needs a location') : _invariant2['default'](false) : undefined;
+	  !(history || location) ?  false ? _invariant2['default'](false, 'match needs a history or a location') : _invariant2['default'](false) : undefined;
 
 	  history = history ? history : _createMemoryHistory2['default'](options);
 	  var transitionManager = _createTransitionManager2['default'](history, _RouteUtils.createRoutes(routes));
 
-	  // Allow match({ location: '/the/path', ... })
-	  if (typeof location === 'string') location = history.createLocation(location);
+	  var unlisten = undefined;
+
+	  if (location) {
+	    // Allow match({ location: '/the/path', ... })
+	    location = history.createLocation(location);
+	  } else {
+	    // Pick up the location from the history via synchronous history.listen
+	    // call if needed.
+	    unlisten = history.listen(function (historyLocation) {
+	      location = historyLocation;
+	    });
+	  }
 
 	  var router = _RouterUtils.createRouterObject(history, transitionManager);
 	  history = _RouterUtils.createRoutingHistory(history, transitionManager);
 
 	  transitionManager.match(location, function (error, redirectLocation, nextState) {
-	    callback(error, redirectLocation, nextState && _extends({}, nextState, { history: history, router: router }));
+	    callback(error, redirectLocation, nextState && _extends({}, nextState, {
+	      history: history,
+	      router: router,
+	      matchContext: { history: history, transitionManager: transitionManager, router: router }
+	    }));
+
+	    // Defer removing the listener to here to prevent DOM histories from having
+	    // to unwind DOM event listeners unnecessarily, in case callback renders a
+	    // <Router> and attaches another history listener.
+	    if (unlisten) {
+	      unlisten();
+	    }
 	  });
 	}
 
@@ -3930,7 +3983,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 47 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3939,9 +3992,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	var _AsyncUtils = __webpack_require__(12);
 
@@ -3951,14 +4004,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function getChildRoutes(route, location, callback) {
 	  if (route.childRoutes) {
-	    callback(null, route.childRoutes);
-	  } else if (route.getChildRoutes) {
-	    route.getChildRoutes(location, function (error, childRoutes) {
-	      callback(error, !error && _RouteUtils.createRoutes(childRoutes));
-	    });
-	  } else {
-	    callback();
+	    return [null, route.childRoutes];
 	  }
+	  if (!route.getChildRoutes) {
+	    return [];
+	  }
+
+	  var sync = true,
+	      result = undefined;
+
+	  route.getChildRoutes(location, function (error, childRoutes) {
+	    childRoutes = !error && _RouteUtils.createRoutes(childRoutes);
+	    if (sync) {
+	      result = [error, childRoutes];
+	      return;
+	    }
+
+	    callback(error, childRoutes);
+	  });
+
+	  sync = false;
+	  return result; // Might be undefined.
 	}
 
 	function getIndexRoute(route, location, callback) {
@@ -4041,12 +4107,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (Array.isArray(indexRoute)) {
 	              var _match$routes;
 
-	               false ? _warning2['default'](indexRoute.every(function (route) {
+	               false ? _routerWarning2['default'](indexRoute.every(function (route) {
 	                return !route.path;
 	              }), 'Index routes should not have paths') : undefined;
 	              (_match$routes = match.routes).push.apply(_match$routes, indexRoute);
 	            } else if (indexRoute) {
-	               false ? _warning2['default'](!indexRoute.path, 'Index routes should not have paths') : undefined;
+	               false ? _routerWarning2['default'](!indexRoute.path, 'Index routes should not have paths') : undefined;
 	              match.routes.push(indexRoute);
 	            }
 
@@ -4066,7 +4132,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Either a) this route matched at least some of the path or b)
 	    // we don't have to load this route's children asynchronously. In
 	    // either case continue checking for matches in the subtree.
-	    getChildRoutes(route, location, function (error, childRoutes) {
+	    var onChildRoutes = function onChildRoutes(error, childRoutes) {
 	      if (error) {
 	        callback(error);
 	      } else if (childRoutes) {
@@ -4085,7 +4151,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      } else {
 	        callback();
 	      }
-	    });
+	    };
+
+	    var result = getChildRoutes(route, location, onChildRoutes);
+	    if (result) {
+	      onChildRoutes.apply(undefined, result);
+	    }
 	  } else {
 	    callback();
 	  }
@@ -4123,7 +4194,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 48 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4144,9 +4215,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
 
-	var _warning = __webpack_require__(1);
+	var _routerWarning = __webpack_require__(1);
 
-	var _warning2 = _interopRequireDefault(_warning);
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
 
 	/**
 	 * Returns a new createHistory function that may be used to create
@@ -4160,7 +4231,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * - isActive(pathname, query, indexOnly=false)
 	 */
 	function useRoutes(createHistory) {
-	   false ? _warning2['default'](false, '`useRoutes` is deprecated. Please use `createTransitionManager` instead.') : undefined;
+	   false ? _routerWarning2['default'](false, '`useRoutes` is deprecated. Please use `createTransitionManager` instead.') : undefined;
 
 	  return function () {
 	    var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -4179,12 +4250,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 49 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var pSlice = Array.prototype.slice;
-	var objectKeys = __webpack_require__(51);
-	var isArguments = __webpack_require__(50);
+	var objectKeys = __webpack_require__(50);
+	var isArguments = __webpack_require__(49);
 
 	var deepEqual = module.exports = function (actual, expected, opts) {
 	  if (!opts) opts = {};
@@ -4279,7 +4350,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 50 */
+/* 49 */
 /***/ function(module, exports) {
 
 	var supportsArgumentsClass = (function(){
@@ -4305,7 +4376,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 51 */
+/* 50 */
 /***/ function(module, exports) {
 
 	exports = module.exports = typeof Object.keys === 'function'
@@ -4320,7 +4391,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 52 */
+/* 51 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -4351,7 +4422,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 53 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4368,6 +4439,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _Actions = __webpack_require__(9);
 
+	var _PathUtils = __webpack_require__(7);
+
 	var _ExecutionEnvironment = __webpack_require__(10);
 
 	var _DOMUtils = __webpack_require__(15);
@@ -4377,10 +4450,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _createDOMHistory = __webpack_require__(26);
 
 	var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
-
-	var _parsePath = __webpack_require__(7);
-
-	var _parsePath2 = _interopRequireDefault(_parsePath);
 
 	/**
 	 * Creates and returns a history object that uses HTML5's history API
@@ -4418,7 +4487,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (isSupported) window.history.replaceState(_extends({}, historyState, { key: key }), null, path);
 	    }
 
-	    var location = _parsePath2['default'](path);
+	    var location = _PathUtils.parsePath(path);
 
 	    return history.createLocation(_extends({}, location, { state: state }), undefined, key);
 	  }
@@ -4534,7 +4603,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 54 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4551,9 +4620,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _Actions = __webpack_require__(9);
 
-	var _parsePath = __webpack_require__(7);
-
-	var _parsePath2 = _interopRequireDefault(_parsePath);
+	var _PathUtils = __webpack_require__(7);
 
 	function createLocation() {
 	  var location = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
@@ -4562,7 +4629,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  var _fourthArg = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 
-	  if (typeof location === 'string') location = _parsePath2['default'](location);
+	  if (typeof location === 'string') location = _PathUtils.parsePath(location);
 
 	  if (typeof action === 'object') {
 	     false ? _warning2['default'](false, 'The state (2nd) argument to createLocation is deprecated; use a ' + 'location descriptor instead') : undefined;
@@ -4592,7 +4659,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 55 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4611,15 +4678,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
+	var _PathUtils = __webpack_require__(7);
+
 	var _Actions = __webpack_require__(9);
 
 	var _createHistory = __webpack_require__(28);
 
 	var _createHistory2 = _interopRequireDefault(_createHistory);
-
-	var _parsePath = __webpack_require__(7);
-
-	var _parsePath2 = _interopRequireDefault(_parsePath);
 
 	function createStateStorage(entries) {
 	  return entries.filter(function (entry) {
@@ -4700,7 +4765,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      entry.key = key;
 	    }
 
-	    var location = _parsePath2['default'](path);
+	    var location = _PathUtils.parsePath(path);
 
 	    return history.createLocation(_extends({}, location, { state: state }), undefined, key);
 	  }
@@ -4752,7 +4817,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4767,17 +4832,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _ExecutionEnvironment = __webpack_require__(10);
 
+	var _PathUtils = __webpack_require__(7);
+
 	var _runTransitionHook = __webpack_require__(17);
 
 	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
-
-	var _extractPath = __webpack_require__(29);
-
-	var _extractPath2 = _interopRequireDefault(_extractPath);
-
-	var _parsePath = __webpack_require__(7);
-
-	var _parsePath2 = _interopRequireDefault(_parsePath);
 
 	var _deprecate = __webpack_require__(16);
 
@@ -4797,7 +4856,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (basename == null && _ExecutionEnvironment.canUseDOM) {
 	      var base = document.getElementsByTagName('base')[0];
 
-	      if (base) basename = _extractPath2['default'](base.href);
+	      if (base) basename = _PathUtils.extractPath(base.href);
 	    }
 
 	    function addBasename(location) {
@@ -4818,7 +4877,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function prependBasename(location) {
 	      if (!basename) return location;
 
-	      if (typeof location === 'string') location = _parsePath2['default'](location);
+	      if (typeof location === 'string') location = _PathUtils.parsePath(location);
 
 	      var pname = location.pathname;
 	      var normalizedBasename = basename.slice(-1) === '/' ? basename : basename + '/';
@@ -4860,20 +4919,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return history.createHref(prependBasename(location));
 	    }
 
-	    function createLocation() {
-	      return addBasename(history.createLocation.apply(history, arguments));
+	    function createLocation(location) {
+	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	        args[_key - 1] = arguments[_key];
+	      }
+
+	      return addBasename(history.createLocation.apply(history, [prependBasename(location)].concat(args)));
 	    }
 
 	    // deprecated
 	    function pushState(state, path) {
-	      if (typeof path === 'string') path = _parsePath2['default'](path);
+	      if (typeof path === 'string') path = _PathUtils.parsePath(path);
 
 	      push(_extends({ state: state }, path));
 	    }
 
 	    // deprecated
 	    function replaceState(state, path) {
-	      if (typeof path === 'string') path = _parsePath2['default'](path);
+	      if (typeof path === 'string') path = _PathUtils.parsePath(path);
 
 	      replace(_extends({ state: state }, path));
 	    }
@@ -4897,11 +4960,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var strictUriEncode = __webpack_require__(58);
+	var strictUriEncode = __webpack_require__(57);
 
 	exports.extract = function (str) {
 		return str.split('?')[1] || '';
@@ -4969,7 +5032,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 58 */
+/* 57 */
 /***/ function(module, exports) {
 
 	'use strict';
